@@ -23,6 +23,7 @@ export default ({ todoRepository }) => {
         todoID,
         userID: session.userID,
         created,
+        completed: false,
       };
 
       if (validateTodo(newTodo)) {
@@ -34,6 +35,26 @@ export default ({ todoRepository }) => {
     } catch (err) {
       console.error(err);
       return res.status(500).send({ error: "Todo creation failed." });
+    }
+  });
+
+  // Get all todo's for current signed-in user
+  router.get("/todos", auth, async (req, res) => {
+    try {
+      let session = verifyToken(req.cookies["todox-session"]);
+      const response = await todoRepository.findAll(session.userID);
+      const todos = await response.toArray();
+
+      if (todos.length) {
+        return res.status(200).send(todos);
+      }
+
+      return res.status(400).send({});
+    } catch (error) {
+      console.log(`Failed to retrieve: ${error}`);
+      return res
+        .status(500)
+        .send({ error: "Retrieval of user todo's failed." });
     }
   });
 

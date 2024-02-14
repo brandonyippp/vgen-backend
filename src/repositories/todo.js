@@ -6,7 +6,12 @@ export default (db) => {
     return await collection.insertOne(todo);
   }
 
+  const findAll = async (userID) => {
+    return await collection.find({ userID: userID });
+  };
+
   return {
     insertOne,
+    findAll,
   };
 };

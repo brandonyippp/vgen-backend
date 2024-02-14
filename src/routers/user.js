@@ -26,9 +26,9 @@ export default ({ userRepository }) => {
         delete user._id;
         delete user.password;
         return res.status(200).send(user);
-      } else {
-        return res.status(400).send({});
       }
+
+      return res.status(400).send({});
     } catch (err) {
       console.error(err);
       res.status(500).send({ error: "Failed to fetch user." });
