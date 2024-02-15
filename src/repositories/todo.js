@@ -12,8 +12,8 @@ export default (db) => {
 
   const updateOne = async (userID, todoID, completed) => {
     return await collection.updateOne(
-      { userID: userID, todoID: todoID },
-      { $set: { completed: completed } }
+      { userID, todoID },
+      { $set: { completed } }
     );
   };
 
