@@ -68,6 +68,8 @@ export default ({ todoRepository }) => {
           .status(400)
           .send({ error: "Bad request body - failed to update todo's." });
       }
+
+      // Update matching documents completion status
       for (let i = 0; i < req.body.length; i++) {
         const todo = req.body[i];
 
