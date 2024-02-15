@@ -6,12 +6,20 @@ export default (db) => {
     return await collection.insertOne(todo);
   }
 
-  const findAll = async (userID) => {
+  const find = async (userID) => {
     return await collection.find({ userID: userID });
+  };
+
+  const updateOne = async (userID, todoID, completed) => {
+    return await collection.updateOne(
+      { userID: userID, todoID: todoID },
+      { $set: { completed: completed } }
+    );
   };
 
   return {
     insertOne,
-    findAll,
+    find,
+    updateOne,
   };
 };

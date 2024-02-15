@@ -42,7 +42,7 @@ export default ({ todoRepository }) => {
   router.get("/todos", auth, async (req, res) => {
     try {
       let session = verifyToken(req.cookies["todox-session"]);
-      const response = await todoRepository.findAll(session.userID);
+      const response = await todoRepository.find(session.userID);
       const todos = await response.toArray();
 
       if (todos.length) {
@@ -51,10 +51,37 @@ export default ({ todoRepository }) => {
 
       return res.status(400).send({});
     } catch (error) {
-      console.log(`Failed to retrieve: ${error}`);
+      console.log(`Failed to retrieve due to bad request: ${error}`);
       return res
         .status(500)
         .send({ error: "Retrieval of user todo's failed." });
+    }
+  });
+
+  // Update todos
+  router.post("/update", auth, async (req, res) => {
+    try {
+      let session = verifyToken(req.cookies["todox-session"]);
+
+      if (!req.body || !req.body.length) {
+        return res
+          .status(400)
+          .send({ error: "Bad request body - failed to update todo's." });
+      }
+      for (let i = 0; i < req.body.length; i++) {
+        const todo = req.body[i];
+
+        await todoRepository.updateOne(
+          session.userID,
+          todo.todoID,
+          todo.status
+        );
+      }
+
+      return res.status(200).send({});
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send({ error: "Todo update failed." });
     }
   });
 
