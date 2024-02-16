@@ -16,7 +16,7 @@ Welcome to the VGen Application (backend portion)! This project allows users to 
   - It should then be available at localhost:4000.
 
 3. Setup your MongoDB URI in ```env```
-       - MONGODB_URI = ```<your_mongo_uri>```
+    - MONGODB_URI = ```<your_mongo_uri>```
 
 6. Assuming you've setup the frontend already (found <a href="https://github.com/brandonyippp/vgen-frontend">here</a>), create an account at ```localhost:3000/signup```
     - Follow the instructions at the provided link for a more-detailed guide on how to sign-up and sign-in.
