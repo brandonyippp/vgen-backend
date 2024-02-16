@@ -80,7 +80,30 @@ export default ({ todoRepository }) => {
         );
       }
 
-      return res.status(200).send({});
+      return res.status(200).send({ success: "Successfully updated todo's." });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send({ error: "Todo update failed." });
+    }
+  });
+
+  // Delete todos
+  router.post("/delete", auth, async (req, res) => {
+    try {
+      let session = verifyToken(req.cookies["todox-session"]);
+
+      if (!req.body || !req.body.length) {
+        return res
+          .status(400)
+          .send({ error: "Bad request body - failed to delete todo's." });
+      }
+
+      for (let i = 0; i < req.body.length; i++) {
+        const todo = req.body[i];
+        await todoRepository.deleteOne(session.userID, todo.todoID);
+      }
+
+      return res.status(200).send({ success: "Successfully deleted todo's." });
     } catch (err) {
       console.error(err);
       return res.status(500).send({ error: "Todo update failed." });

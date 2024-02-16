@@ -17,9 +17,14 @@ export default (db) => {
     );
   };
 
+  const deleteOne = async (userID, todoID, completed) => {
+    return await collection.deleteOne({ userID, todoID });
+  };
+
   return {
     insertOne,
     find,
     updateOne,
+    deleteOne,
   };
 };
