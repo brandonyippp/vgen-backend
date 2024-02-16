@@ -2,7 +2,7 @@
 
 Welcome to the Todo Web Application! This project allows users to manage their tasks efficiently. The application consists of both a frontend and a backend, providing a seamless experience for users to sign up, sign in, create todos, mark them as complete or incomplete, and organize them based on alphabetical order and creation date. Additionally, users can filter their todos based on their completion status.
 
-## Frontend
+## Backend
 
 ### Getting Started
 
