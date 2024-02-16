@@ -6,11 +6,15 @@ Welcome to the VGen Application (backend portion)! This project allows users to 
 
 ### Getting Started
 
-1. Clone the repository to your local machine:
+0. Necessary tools:
+    - MongoDB: ```https://www.mongodb.com/docs/manual/administration/install-community/```
+    - Node.js: ```https://nodejs.org/en/download```
+
+2. Clone the repository to your local machine:
 
     - ```git clone https://github.com/brandonyippp/vgen-backend```
 
-2. Run the following commands:
+3. Run the following commands:
     - ```npm i```
     - ```npm start```
   - It should then be available at localhost:4000.
